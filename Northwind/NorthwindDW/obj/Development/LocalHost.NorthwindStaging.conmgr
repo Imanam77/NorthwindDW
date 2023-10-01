@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="LocalHost.NorthwindStaging"
+  DTS:DTSID="{8F58454D-242A-4BC0-8072-9594FC5B6081}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=.;Initial Catalog=NorthwindStaging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-StagingGeography-{8F58454D-242A-4BC0-8072-9594FC5B6081}LocalHost.NorthwindStaging;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

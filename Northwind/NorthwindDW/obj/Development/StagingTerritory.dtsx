@@ -1,0 +1,1848 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/20/2023 5:17:31 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-FBLE0BS"
+  DTS:CreatorName="DESKTOP-FBLE0BS\ASUS"
+  DTS:DTSID="{E7AF60E5-2537-4DB6-9368-A0EF273ADCE3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5209.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{D7892473-B59B-4A0B-A5AA-E6CF5BDCD06E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FullLoad_StagingTerritory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3C246CEC-4597-42D6-B7BD-EC75A6F20F15}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FullLoad_StagingTerritory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FullLoad_StagingTerritory\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="RegionDescription"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[RegionID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]"
+                      name="RegionDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FullLoad_StagingTerritory\Regions"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Regions"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Region]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FullLoad_StagingTerritory\Regions.Connections[OleDbConnection]"
+                  connectionManagerID="{AE2F6B0D-526A-435D-83EA-E1D29330D785}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionDescription]"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]"
+                      name="RegionDescription"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="RegionDescription" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      name="RegionID" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionDescription]"
+                      name="RegionDescription" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FullLoad_StagingTerritory\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FullLoad_StagingTerritory\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FullLoad_StagingTerritory\StagingTerritory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StagingTerritory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[StagingTerritory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FullLoad_StagingTerritory\StagingTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{8F58454D-242A-4BC0-8072-9594FC5B6081}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NorthwindStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryDescription]"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionID]"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[RegionDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="RegionDescription"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionDescription]"
+                      lineageId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryDescription" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="RegionDescription" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FullLoad_StagingTerritory\Territories"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Territories"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Territories]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FullLoad_StagingTerritory\Territories.Connections[OleDbConnection]"
+                  connectionManagerID="{AE2F6B0D-526A-435D-83EA-E1D29330D785}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      length="20"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      name="TerritoryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryDescription]"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      name="RegionID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryDescription" />
+                    <externalMetadataColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      name="TerritoryID" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      name="RegionID" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FullLoad_StagingTerritory.Paths[Merge Join Output]"
+              endId="Package\FullLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]"
+              name="Merge Join Output"
+              startId="Package\FullLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FullLoad_StagingTerritory.Paths[OLE DB Source Output]"
+              endId="Package\FullLoad_StagingTerritory\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\FullLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FullLoad_StagingTerritory.Paths[OLE DB Source Output1]"
+              endId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\FullLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FullLoad_StagingTerritory.Paths[Sort Output]"
+              endId="Package\FullLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\FullLoad_StagingTerritory\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\IncrementalLoad_StagingTerritory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{52db360f-4d78-46e8-918e-f37c0ab388cb}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="IncrementalLoad_StagingTerritory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\IncrementalLoad_StagingTerritory\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="RegionDescription"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[TerritoryDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input].Columns[RegionID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]"
+                      name="RegionDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input].Columns[RegionDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\IncrementalLoad_StagingTerritory\Regions"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Regions"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Region]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\IncrementalLoad_StagingTerritory\Regions.Connections[OleDbConnection]"
+                  connectionManagerID="{AE2F6B0D-526A-435D-83EA-E1D29330D785}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionDescription]"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].Columns[RegionDescription]"
+                      name="RegionDescription"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output].ExternalColumns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="RegionDescription" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      name="RegionID" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[RegionDescription]"
+                      name="RegionDescription" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\IncrementalLoad_StagingTerritory\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\IncrementalLoad_StagingTerritory\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Inputs[Sort Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryID]"
+                      name="TerritoryID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output].Columns[RegionID]"
+                      name="RegionID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StagingTerritory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[StagingTerritory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Connections[OleDbConnection]"
+                  connectionManagerID="{8F58454D-242A-4BC0-8072-9594FC5B6081}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NorthwindStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryID]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="TerritoryID"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryID]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[TerritoryDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="TerritoryDescription"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryDescription]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[TerritoryDescription]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[RegionID]"
+                      cachedDataType="i4"
+                      cachedName="RegionID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionID]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionID]" />
+                    <inputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].Columns[RegionDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="RegionDescription"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionDescription]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output].Columns[RegionDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryDescription" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input].ExternalColumns[RegionDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="RegionDescription" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\IncrementalLoad_StagingTerritory\Territories"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Territories"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Territories]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\IncrementalLoad_StagingTerritory\Territories.Connections[OleDbConnection]"
+                  connectionManagerID="{AE2F6B0D-526A-435D-83EA-E1D29330D785}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      length="20"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryID]"
+                      name="TerritoryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryDescription]"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].Columns[RegionID]"
+                      name="RegionID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      name="TerritoryID" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      name="TerritoryDescription" />
+                    <externalMetadataColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output].ExternalColumns[RegionID]"
+                      dataType="i4"
+                      name="RegionID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryID]"
+                      name="TerritoryID" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryDescription]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[TerritoryDescription]"
+                      name="TerritoryDescription" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[RegionID]"
+                      name="RegionID" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\IncrementalLoad_StagingTerritory.Paths[Merge Join Output]"
+              endId="Package\IncrementalLoad_StagingTerritory\StagingTerritory.Inputs[OLE DB Destination Input]"
+              name="Merge Join Output"
+              startId="Package\IncrementalLoad_StagingTerritory\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\IncrementalLoad_StagingTerritory.Paths[OLE DB Source Output]"
+              endId="Package\IncrementalLoad_StagingTerritory\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\IncrementalLoad_StagingTerritory\Territories.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\IncrementalLoad_StagingTerritory.Paths[OLE DB Source Output1]"
+              endId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\IncrementalLoad_StagingTerritory\Regions.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\IncrementalLoad_StagingTerritory.Paths[Sort Output]"
+              endId="Package\IncrementalLoad_StagingTerritory\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\IncrementalLoad_StagingTerritory\Sort.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\FullLoad_StagingTerritory"
+          TopLeft="428.576932290956,96.5000019312812" />
+        <NodeLayout
+          Size="239.2,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory"
+          TopLeft="137.038464403188,100.403030160902" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FullLoad_StagingTerritory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\FullLoad_StagingTerritory\Territories"
+          TopLeft="108.961540714788,25.5909095172958" />
+        <NodeLayout
+          Size="116,41.6"
+          Id="Package\FullLoad_StagingTerritory\Regions"
+          TopLeft="420.500008384769,26.4393937471019" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\FullLoad_StagingTerritory\Sort"
+          TopLeft="119.346156325566,104.493940781786" />
+        <EdgeLayout
+          Id="Package\FullLoad_StagingTerritory.Paths[OLE DB Source Output]"
+          TopLeft="170.153848520177,67.1909095172958">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.3030312644905"
+              Start="0,0"
+              End="0,29.8030312644905">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8030312644905" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\FullLoad_StagingTerritory\Merge Join"
+          TopLeft="284.73077531203,180.009094069369" />
+        <EdgeLayout
+          Id="Package\FullLoad_StagingTerritory.Paths[Sort Output]"
+          TopLeft="168.146156325566,146.093940781786">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="181.384618986464,33.9151532875825"
+              Start="0,0"
+              End="181.384618986464,26.4151532875825">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.9575766437912" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.9575766437912"
+                    Point2="0,16.9575766437912"
+                    Point3="4,16.9575766437912" />
+                  <mssgle:LineSegment
+                    End="177.384618986464,16.9575766437912" />
+                  <mssgle:CubicBezierSegment
+                    Point1="177.384618986464,16.9575766437912"
+                    Point2="181.384618986464,16.9575766437912"
+                    Point3="181.384618986464,20.9575766437912" />
+                  <mssgle:LineSegment
+                    End="181.384618986464,26.4151532875825" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FullLoad_StagingTerritory.Paths[OLE DB Source Output1]"
+          TopLeft="478.500008384769,68.0393937471019">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108.702566406072,111.969700322267"
+              Start="0,0"
+              End="-108.702566406072,104.469700322267">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.3625297031972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62.3625297031972"
+                    Point2="0,66.3625297031972"
+                    Point3="-4,66.3625297031972" />
+                  <mssgle:LineSegment
+                    End="-104.702566406072,66.3625297031972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-104.702566406072,66.3625297031972"
+                    Point2="-108.702566406072,66.3625297031972"
+                    Point3="-108.702566406072,70.3625297031972" />
+                  <mssgle:LineSegment
+                    End="-108.702566406072,104.469700322267" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\FullLoad_StagingTerritory\StagingTerritory"
+          TopLeft="265.11539026945,285.196975632941" />
+        <EdgeLayout
+          Id="Package\FullLoad_StagingTerritory.Paths[Merge Join Output]"
+          TopLeft="345.92308279074,221.609094069369">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5878815635726"
+              Start="0,0"
+              End="0,56.0878815635726">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.0878815635726" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FullLoad_StagingTerritory\Territories">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FullLoad_StagingTerritory\Regions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FullLoad_StagingTerritory\StagingTerritory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\IncrementalLoad_StagingTerritory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory\Sort"
+          TopLeft="119.346156325566,104.493940781786" />
+        <NodeLayout
+          Size="126.4,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory\Territories"
+          TopLeft="108.961540714788,25.5909095172958" />
+        <NodeLayout
+          Size="116,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory\Regions"
+          TopLeft="420.500008384769,26.4393937471019" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory\StagingTerritory"
+          TopLeft="265.11539026945,285.196975632941" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\IncrementalLoad_StagingTerritory\Merge Join"
+          TopLeft="284.73077531203,180.009094069369" />
+        <EdgeLayout
+          Id="Package\IncrementalLoad_StagingTerritory.Paths[Sort Output]"
+          TopLeft="168.146156325566,146.093940781786">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="181.384618986464,33.9151532875825"
+              Start="0,0"
+              End="181.384618986464,26.4151532875825">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.9575766437912" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.9575766437912"
+                    Point2="0,16.9575766437912"
+                    Point3="4,16.9575766437912" />
+                  <mssgle:LineSegment
+                    End="177.384618986464,16.9575766437912" />
+                  <mssgle:CubicBezierSegment
+                    Point1="177.384618986464,16.9575766437912"
+                    Point2="181.384618986464,16.9575766437912"
+                    Point3="181.384618986464,20.9575766437912" />
+                  <mssgle:LineSegment
+                    End="181.384618986464,26.4151532875825" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\IncrementalLoad_StagingTerritory.Paths[OLE DB Source Output1]"
+          TopLeft="478.500008384769,68.0393937471019">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-108.702566406072,111.969700322267"
+              Start="0,0"
+              End="-108.702566406072,104.469700322267">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.3625297031972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62.3625297031972"
+                    Point2="0,66.3625297031972"
+                    Point3="-4,66.3625297031972" />
+                  <mssgle:LineSegment
+                    End="-104.702566406072,66.3625297031972" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-104.702566406072,66.3625297031972"
+                    Point2="-108.702566406072,66.3625297031972"
+                    Point3="-108.702566406072,70.3625297031972" />
+                  <mssgle:LineSegment
+                    End="-108.702566406072,104.469700322267" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\IncrementalLoad_StagingTerritory.Paths[OLE DB Source Output]"
+          TopLeft="170.153848520177,67.1909095172958">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.3030312644905"
+              Start="0,0"
+              End="0,29.8030312644905">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8030312644905" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\IncrementalLoad_StagingTerritory.Paths[Merge Join Output]"
+          TopLeft="345.92308279074,221.609094069369">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5878815635726"
+              Start="0,0"
+              End="0,56.0878815635726">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.0878815635726" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
